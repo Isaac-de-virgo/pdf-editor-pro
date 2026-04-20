@@ -1,0 +1,52 @@
+{
+  "name": "pdf-editor-pro",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Editor profesional de PDF en línea con detección inteligente de contenido editable: edita texto preservando fuentes, añade imágenes, firma, anota, dibuja y exporta — todo desde el navegador. Incluye servidor MCP (Model Context Protocol).",
+  "keywords": [
+    "pdf",
+    "pdf-editor",
+    "editar-pdf",
+    "editor-pdf",
+    "pdf-online",
+    "annotate-pdf",
+    "sign-pdf",
+    "firmar-pdf",
+    "modificar-pdf",
+    "react",
+    "vite",
+    "fabricjs",
+    "pdfjs",
+    "pdf-lib",
+    "mcp",
+    "model-context-protocol"
+  ],
+  "homepage": "https://pdf-editor-pro.app/",
+  "author": "PDF Editor Pro",
+  "license": "MIT",
+  "bin": {
+    "pdf-editor-mcp": "mcp/server.js"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "mcp": "node mcp/server.js",
+    "mcp:inspect": "npx --yes @modelcontextprotocol/inspector node mcp/server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "@pdf-lib/fontkit": "^1.1.1",
+    "lucide-react": "^1.8.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^4.7.76",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  }
+}

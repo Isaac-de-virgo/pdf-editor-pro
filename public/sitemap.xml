@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://pdf-editor-pro.app/</loc>
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pdf-editor-pro.app/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pdf-editor-pro.app/"/>
+    <image:image>
+      <image:loc>https://pdf-editor-pro.app/nota.png</image:loc>
+      <image:title>PDF Editor Pro</image:title>
+      <image:caption>Editor de PDF online gratuito — edita texto, imágenes y anota</image:caption>
+    </image:image>
+  </url>
+
+</urlset>

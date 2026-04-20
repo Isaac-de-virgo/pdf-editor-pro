@@ -1,0 +1,29 @@
+# robots.txt for PDF Editor Pro
+# https://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+Allow: /
+Disallow: /mcp/
+Disallow: /node_modules/
+Disallow: /*.bak$
+
+# Explicit allow for main assets (helps some crawlers)
+Allow: /nota.png
+Allow: /nota.ico
+Allow: /site.webmanifest
+
+# Block common AI scrapers (optional — comment out to allow)
+# User-agent: GPTBot
+# Disallow: /
+# User-agent: CCBot
+# Disallow: /
+# User-agent: anthropic-ai
+# Disallow: /
+# User-agent: Claude-Web
+# Disallow: /
+
+# Sitemap
+Sitemap: https://pdf-editor-pro.app/sitemap.xml
+
+# Crawl delay (1 second) — be polite to shared hosts
+Crawl-delay: 1
