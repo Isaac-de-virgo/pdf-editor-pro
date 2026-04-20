@@ -2,8 +2,16 @@ import { ChevronLeft, ChevronRight, Minus, Plus, Maximize2 } from 'lucide-react'
 
 export default function BottomBar({
   curPage, totalPages, onPrev, onNext, objCount,
+  scanStats,
   dispZoom, onZoomOut, onZoomIn, onFit,
 }) {
+  const detectLabel = scanStats
+    ? [
+        scanStats.txt ? `${scanStats.txt} texto${scanStats.txt !== 1 ? 's' : ''}` : null,
+        scanStats.img ? `${scanStats.img} imagen${scanStats.img !== 1 ? 'es' : ''}` : null,
+      ].filter(Boolean).join(' / ') + ' listos'
+    : ''
+
   return (
     <div className="btmbar">
       <span style={{ minWidth: 80 }}>
@@ -13,6 +21,9 @@ export default function BottomBar({
       <button className="nbtn" onClick={onNext} disabled={!totalPages || curPage >= totalPages}>Siguiente <ChevronRight size={14} /></button>
       <span style={{ color: '#333', fontSize: 11 }}>
         {objCount > 0 ? `${objCount} obj${objCount > 1 ? 's' : ''}` : ''}
+      </span>
+      <span style={{ color: '#6b6b6b', fontSize: 11, minWidth: 140 }}>
+        {detectLabel}
       </span>
       <span style={{ flex: 1 }} />
       <button className="zbtn" onClick={onZoomOut}><Minus size={12} /></button>

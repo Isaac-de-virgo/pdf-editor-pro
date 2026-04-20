@@ -34,6 +34,8 @@ export default function App() {
     del:  editor.delSel,
     setTool: editor.setCurTool,
     nudge: editor.nudge,
+    format: editor.propsPanel.togFmt,
+    canFormatText: editor.canFormatText,
   })
 
   return (
@@ -87,6 +89,7 @@ export default function App() {
         onPrev={editor.prevPg}
         onNext={editor.nextPg}
         objCount={editor.objCount}
+        scanStats={editor.scanStats}
         dispZoom={editor.dispZoom}
         onZoomOut={() => editor.adjZoom(-0.25)}
         onZoomIn={()  => editor.adjZoom(+0.25)}
