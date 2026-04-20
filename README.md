@@ -166,3 +166,9 @@ public/
 - El editor sigue un patron de composicion donde `App.jsx` conecta hooks y componentes, mientras la logica vive principalmente en `src/hooks/usePdfEditor.js` y `src/services/`.
 - La deteccion usa un enfoque de pares "cover + objeto" para preservar la apariencia original mientras habilita la edicion del contenido detectado.
 - Para caracteres fuera de Latin-1 en el servidor MCP, puede ser necesario registrar una fuente TTF/OTF con `set_default_font`.
+
+## Derechos y uso
+
+Este repositorio es software propietario. Salvo autorizacion expresa y por escrito del titular, no se concede permiso para copiar, redistribuir, modificar, sublicenciar ni explotar comercialmente este codigo.
+
+Consulta el archivo [LICENSE](LICENSE) para el texto aplicable.

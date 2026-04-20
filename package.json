@@ -24,7 +24,7 @@
   ],
   "homepage": "https://pdf-editor-pro.app/",
   "author": "PDF Editor Pro",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "bin": {
     "pdf-editor-mcp": "mcp/server.js"
   },
