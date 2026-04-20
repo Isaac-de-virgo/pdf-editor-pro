@@ -10,6 +10,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { RS } from '../constants.js'
+import { computeFloatingTextAnchor, isTextObject } from '../domain/editorUi.js'
 import { initPdfWorker, loadDocument, rasterizePage, renderThumbnail }
   from '../services/pdf/PdfService.js'
 import { detectPageContent } from '../services/pdf/detection/index.js'
@@ -128,14 +129,18 @@ export function usePdfEditor({ showToast, setLoad } = {}) {
   // coordinates relative to the canvas-area scroll container. Returns
   // null if refs aren't ready yet or the object isn't text.
   const computeTextFloat = useCallback((obj) => {
-    if (!obj || (obj.type !== 'i-text' && obj.type !== 'textbox')) return null
-    const wrap = canvasWrapRef.current
-    if (!wrap) return null
-    const z = dispZoom
-    const bbox = obj.getBoundingRect(true) // canvas coords
-    const left = wrap.offsetLeft + (bbox.left + bbox.width / 2) * z
-    const top  = wrap.offsetTop  + bbox.top * z
-    return { left, top }
+    if (!isTextObject(obj)) return null
+    const canvasEl = canvasElRef.current
+    const area = canvasAreaRef.current
+    if (!canvasEl || !area) return null
+    return computeFloatingTextAnchor({
+      bounds: obj.getBoundingRect(true),
+      canvasRect: canvasEl.getBoundingClientRect(),
+      areaRect: area.getBoundingClientRect(),
+      scrollLeft: area.scrollLeft,
+      scrollTop: area.scrollTop,
+      zoom: dispZoom,
+    })
   }, [dispZoom])
 
   // Stable ref so the once-bound canvas event handlers always call the
@@ -159,7 +164,7 @@ export function usePdfEditor({ showToast, setLoad } = {}) {
       type: marker + (typeLabels[obj.type] || obj.type),
       pos: `X: ${Math.round(obj.left)}  Y: ${Math.round(obj.top)}\n${Math.round(obj.getScaledWidth())} × ${Math.round(obj.getScaledHeight())} px`,
     })
-    setTextFloat(computeTextFloat(obj))
+    setTextFloat(isTextObject(obj) ? computeTextFloat(obj) : null)
   }, [syncPropsUI, computeTextFloat])
 
   // ── Mouse drawing (shapes + text tool) ──────────────────────
@@ -523,6 +528,13 @@ export function usePdfEditor({ showToast, setLoad } = {}) {
     pushUndo()
   }, [pushUndo])
 
+  const canFormatText = useCallback(() => {
+    const obj = svcRef.current?.getCanvas()?.getActiveObject()
+    if (!obj) return false
+    if (isTextObject(obj)) return true
+    return obj.type === 'activeSelection' && obj._objects?.some(isTextObject)
+  }, [])
+
   // ── Insert image from disk ──────────────────────────────────
   const insertImg = useCallback((file) => {
     const svc = svcRef.current; const fc = svc?.getCanvas()
@@ -648,6 +660,7 @@ export function usePdfEditor({ showToast, setLoad } = {}) {
     insertImg, delSel, selAll, dupSel, clearPage,
     undoA, redoA, adjZoom, fitPage, nudge,
     exportPDF,
+    canFormatText,
     // panel bundle
     propsPanel,
   }
